@@ -19,7 +19,7 @@ public class MyList<T extends Number> implements List<T> {
     }
 
    public double getDouble(int index) throws Exception {
-        if (CLASS == Double.class){
+        if (CLASS == Double.class || CLASS.getSuperclass().getSimpleName().equals("Object")){
             if (checkIndex(index)){
                 return (double) get(index);
             }else{
@@ -30,14 +30,14 @@ public class MyList<T extends Number> implements List<T> {
     }
 
     public int sumIntegers() throws Exception {
-        if (CLASS == Integer.class){
+        if (CLASS==Integer.class || CLASS.getSuperclass().getSimpleName().equals("Object")){
             int count = 0;
             for (int i = arr.length-size; i <arr.length ; i++) {
                 count += (int)arr[i];
             }
             return count;
         }
-        throw new Exception("Class is not Integer");
+        throw new Exception("At least one element is not Integer");
     }
 
     public boolean add(T x) {
