@@ -20,7 +20,7 @@ public class MyList<T extends Number> implements List<T> {
 
    public double getDouble(int index) throws Exception {
        try {
-           if (CLASS == Double.class || CLASS.getSuperclass().getSimpleName().equals("Object")) {
+           if (CLASS.equals(Double.class) || CLASS.getSuperclass().getSimpleName().equals("Object")) {
                if (checkIndex(index)) {
                    return (double) get(index);
                } else {
@@ -34,7 +34,7 @@ public class MyList<T extends Number> implements List<T> {
    }
     public int sumIntegers() throws Exception {
         try {
-            if (CLASS == Integer.class || CLASS.getSuperclass().getSimpleName().equals("Object")) {
+            if (CLASS.equals(Integer.class) || CLASS.getSuperclass().getSimpleName().equals("Object")) {
                 int count = 0;
 
                 for (int i = arr.length - size; i < arr.length; i++) {
@@ -163,7 +163,7 @@ public class MyList<T extends Number> implements List<T> {
 
     @Override
     public int indexOf(Object o) {
-        if (!checkContains(o)){
+        if (checkNotContains(o)){
             return -1;
         }
         for (int i = arr.length - size; i <arr.length ; i++) {
@@ -176,7 +176,7 @@ public class MyList<T extends Number> implements List<T> {
 
     @Override
     public int lastIndexOf(Object o) {
-        if (!checkContains(o)){
+        if (checkNotContains(o)){
             return -1;
         }
         for (int i = arr.length-1; i >= arr.length - size ; i--) {
@@ -204,13 +204,13 @@ public class MyList<T extends Number> implements List<T> {
         return index <= size && index >= 0;
     }
 
-    private boolean checkContains(Object o){
+    private boolean checkNotContains(Object o){
         for (int i = 0; i < size; i++) {
             if (o.equals(arr[arr.length - size+i])){
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 
     private void sortNull() {
